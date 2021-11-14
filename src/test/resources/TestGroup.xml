@@ -1,0 +1,15 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+
+<suite name="TestGroup" verbose="1" >
+    <test name="rozetka positive tests" >
+        <groups>
+            <run>
+                <include name="functest" />
+            </run>
+        </groups>
+        <classes>
+            <class name="rozetka.Search"/>
+            <class name="rozetka.Filter"/>
+        </classes>
+    </test>
+</suite>
