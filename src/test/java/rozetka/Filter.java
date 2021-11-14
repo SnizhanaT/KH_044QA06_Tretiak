@@ -16,13 +16,15 @@ public class Filter extends BaseTest{
     static By checkboxRozetka = By.xpath("//label[contains(text(),'Rozetka')]/../input[@type='checkbox']/..");
     static By checkboxBrandAsus = By.xpath("//label[contains(text(),'Asus')]/../input[@type='checkbox']/..");
     static By filterResults = By.cssSelector(".catalog-grid li");
-    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebDriverWait wait;
 
     @Test(groups = {"functest"})
     public void getRozetkaSellerFilterResult(){
         System.out.println("FilterClass method 1 - filter on seller rozetka");
         WebElement catalogButton = driver.findElement(catalog);
         catalogButton.click();
+
+        wait = new WebDriverWait(driver, 10);
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(monitors));
         WebElement monitorsButton = driver.findElement(monitors);
@@ -47,6 +49,7 @@ public class Filter extends BaseTest{
         wait.until(ExpectedConditions.visibilityOfElementLocated(monitors));
         WebElement monitorsButton = driver.findElement(monitors);
         monitorsButton.click();
+
         wait.until(ExpectedConditions.elementToBeClickable(checkboxBrandAsus));
         WebElement brandAsus = driver.findElement(checkboxBrandAsus);
         Actions actions = new Actions(driver);
