@@ -6,6 +6,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import java.util.List;
 
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
 public class SearchTest extends BaseTest {
 
     @DataProvider(name = "searchInput")
@@ -18,10 +20,11 @@ public class SearchTest extends BaseTest {
 
     @Test(dataProvider = "searchInput", groups = {"functest"})
     public void searchInputTest(String searchInput) {
-        WebElement searchField = driver.findElement(By.xpath("//input[@search-input]"));
-        searchField.clear();
-        searchField.sendKeys(searchInput);
-        searchField.sendKeys(Keys.ENTER);
+        HomePage homepage = new HomePage(driver);
+        homepage.search(searchInput);
+        SearchResultsPage searchResultsPage = new SearchResultsPage(driver);
+        String resultCatalogTitle = searchResultsPage.getSearchCatalogTitle();
+        assertThat(resultCatalogTitle).containsIgnoringCase(searchInput);
     }
 
     @Test(groups = {"positivetest"})

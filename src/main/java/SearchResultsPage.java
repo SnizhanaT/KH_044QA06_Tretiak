@@ -7,6 +7,7 @@ import java.util.List;
 public class SearchResultsPage extends BasePage {
     private By results = new By.ByCssSelector("section.content .goods-tile");
     private By titleXPath = new By.ByXPath(".//span[@class='goods-tile__title']");
+    private By searchTitle = new By.ByCssSelector("h1.catalog-heading");
 
     public SearchResultsPage(WebDriver driver) {
         this.driver = driver;
@@ -20,5 +21,11 @@ public class SearchResultsPage extends BasePage {
             titles.add(titleWebElement.getText());
         }
         return titles;
+    }
+
+    public String getSearchCatalogTitle(){
+        WebElement searchCatalogHeading = driver.findElement(searchTitle);
+        String searchCatalogTitle = searchCatalogHeading.getText();
+        return searchCatalogTitle;
     }
 }
