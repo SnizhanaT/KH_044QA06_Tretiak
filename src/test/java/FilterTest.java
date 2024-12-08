@@ -1,34 +1,25 @@
-package rozetka;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.*;
+import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class Filter extends BaseTest{
+public class FilterTest extends BaseTest {
 
-    static By catalog = By.cssSelector("#fat-menu");
     static By monitors = By.xpath("(//a[contains(@href,'monitors')])[2]");
     static By checkboxRozetka = By.xpath("//label[contains(text(),'Rozetka')]/../input[@type='checkbox']/..");
     static By checkboxBrandAsus = By.xpath("//label[contains(text(),'Asus')]/../input[@type='checkbox']/..");
     static By filterResults = By.cssSelector(".catalog-grid li");
-    WebDriverWait wait;
 
     @Test(groups = {"functest"})
-    public void getRozetkaSellerFilterResult(){
-        System.out.println("FilterClass method 1 - filter on seller rozetka");
-        WebElement catalogButton = driver.findElement(catalog);
-        catalogButton.click();
+    public void getRozetkaSellerFilterResult() {
+        HomePage homepage = new HomePage(driver);
+        homepage.openCatalog();
 
-        wait = new WebDriverWait(driver, 10);
+        homepage.openCategoryPageFromCatalog(monitors);
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(monitors));
-        WebElement monitorsButton = driver.findElement(monitors);
-        monitorsButton.click();
         wait.until(ExpectedConditions.elementToBeClickable(checkboxRozetka));
         WebElement sellerRozetka = driver.findElement(checkboxRozetka);
         Actions actions = new Actions(driver);
@@ -41,20 +32,16 @@ public class Filter extends BaseTest{
     }
 
     @Test(groups = {"positivetest"})
-    public void getBrandFilterResult(){
-        System.out.println("FilterClass method 2 - filter on brand asus");
-        WebElement catalogButton = driver.findElement(catalog);
-        catalogButton.click();
+    public void getBrandFilterResult() {
+        HomePage homepage = new HomePage(driver);
+        homepage.openCatalog();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(monitors));
-        WebElement monitorsButton = driver.findElement(monitors);
-        monitorsButton.click();
+        homepage.openCategoryPageFromCatalog(monitors);
 
         wait.until(ExpectedConditions.elementToBeClickable(checkboxBrandAsus));
         WebElement brandAsus = driver.findElement(checkboxBrandAsus);
         Actions actions = new Actions(driver);
         actions.moveToElement(brandAsus).click().build().perform();
-
     }
 
 }

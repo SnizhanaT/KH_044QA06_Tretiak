@@ -2,9 +2,11 @@
 
 <suite name="SuiteAll" verbose="1" >
     <test name="test rozetka" >
-        <packages>
-            <package name="rozetka"/>
-        </packages>
-
+        <classes>
+            <class name="BaseTest"></class>
+            <class name="FilterTest"></class>
+            <class name="SearchTest"></class>
+            <class name="WantWorkFormTest"></class>
+        </classes>
     </test>
 </suite>
